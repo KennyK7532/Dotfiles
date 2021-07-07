@@ -27,20 +27,15 @@ alias \
 	ls="ls -al -hN --color=auto --group-directories-first" \
 	grep="grep --color=auto" \
 	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi"
 
 # These common commands are just too long! Abbreviate them.
 alias \
 	ka="killall" \
 	g="git" \
-	trem="transmission-remote" \
-	YT="youtube-viewer" \
 	sdn="sudo shutdown -h now" \
 	e="$EDITOR" \
 	v="$EDITOR" \
-	p="sudo powerpill" \
-	xi="sudo xbps-install" \
-	xr="sudo xbps-remove -R" \
-	xq="xbps-query" \
+	p="sudo pacman" \
+	a="sudo apt" \
 	z="zathura" \
-	a="aria2c --dir=/home/notsusxd/Downloads -x 8 --summary-interval=0 --auto-file-renaming=false "$(echo $downloadreq | jq -r '.msg.download')""
+	aria2c="aria2c --dir=/home/notsusxd/Downloads -x 8 --summary-interval=0 --auto-file-renaming=false "$(echo $downloadreq | jq -r '.msg.download')""
