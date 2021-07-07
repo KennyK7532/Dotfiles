@@ -74,7 +74,9 @@ bindkey '^e' edit-command-line
 PATH="$HOME/.local/bin${PATH:+:${PATH}}"
 
 ### RANDOM COLOR SCRIPT ###
-colorscript random
+#colorscript random
 
+# Enable starship prompt
+eval "$(starship init zsh)"
 # Load syntax highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.plugin.zsh 2>/dev/null
+source /home/notsusxd/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
