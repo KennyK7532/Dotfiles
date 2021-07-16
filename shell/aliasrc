@@ -38,5 +38,6 @@ alias \
 	p="sudo pacman" \
 	a="sudo apt" \
 	pmm="sudo pmm" \
+	d="sudo dnf-3" \
 	z="zathura" \
 	aria2c="aria2c --dir=/home/notsusxd/Downloads -x 8 -k 2M --summary-interval=0 --auto-file-renaming=false "$(echo $downloadreq | jq -r '.msg.download')""
