@@ -39,5 +39,5 @@ alias \
 	a="sudo apt-fast" \
 	pmm="sudo pmm" \
 	d="sudo dnf-3" \
-	z="zathura" \
+	z="sudo zypper" \
 	aria="aria2c -x 8 -k 2M --summary-interval=0 --auto-file-renaming=false "$(echo $downloadreq | jq -r '.msg.download')""
