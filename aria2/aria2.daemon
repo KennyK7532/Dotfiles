@@ -1,14 +1,18 @@
 
 continue
 daemon=true
-dir=/home/notsusxd/Videos/.ss
 file-allocation=falloc
 log-level=warn
 max-connection-per-server=16
 max-concurrent-downloads=3
 max-overall-download-limit=0
-min-split-size=5M
+min-split-size=2M
 enable-http-pipelining=true
 
 enable-rpc=true
 rpc-listen-all=true
+
+# Proxy
+#http-proxy=127.0.0.1:1087
+#https-proxy=127.0.0.1:1087
+#ftp-proxy=127.0.0.1:1087
