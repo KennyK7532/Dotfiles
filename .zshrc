@@ -80,3 +80,4 @@ PATH="$HOME/.local/bin${PATH:+:${PATH}}"
 eval "$(starship init zsh)"
 # Load syntax highlighting; should be last.
 source "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source "$HOME/zsh-autosuggestions/zsh-autosuggestions.zsh"
