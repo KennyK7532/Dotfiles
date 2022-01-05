@@ -79,4 +79,4 @@ PATH="$HOME/.local/bin${PATH:+:${PATH}}"
 # Enable starship prompt
 eval "$(starship init zsh)"
 # Load syntax highlighting; should be last.
-source /home/notsusxd/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source "$HOME/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
