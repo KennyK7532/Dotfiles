@@ -1,4 +1,4 @@
-
+# Basic download settings
 continue
 daemon=true
 file-allocation=falloc
@@ -13,6 +13,6 @@ enable-rpc=true
 rpc-listen-all=true
 
 # Proxy
-#http-proxy=127.0.0.1:1087
-#https-proxy=127.0.0.1:1087
-#ftp-proxy=127.0.0.1:1087
+http-proxy=127.0.0.1:20171
+https-proxy=127.0.0.1:20171
+ftp-proxy=127.0.0.1:20171
