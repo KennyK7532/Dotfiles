@@ -15,7 +15,7 @@ local opt = require 'mp.options'
 
 local o = {
     --root directories
-    root = "~/",
+    root = "~/Videos",
 
     --characters to use as seperators
     root_seperators = ",;",
