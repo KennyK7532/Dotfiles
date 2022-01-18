@@ -1,7 +1,10 @@
 ## Download options
 --ignore-errors
 # --no-playlist
+#--external-downloader aria2c
+#--external-downloader-args '-c -j 3 -x 3 -s 3 -k 1M'
+--add-metadata
 
 
 ## Preferred video format
--f mp4
+-f "((bv*[fps>30]/bv*)[height<=720]/(wv*[fps>30]/wv*)) + ba / (b[fps>30]/b)[height<=720]/(w[fps>30]/w)"
