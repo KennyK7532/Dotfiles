@@ -18,7 +18,6 @@ alias \
 	rm="rm -vI" \
 	bc="bc -ql" \
 	mkd="mkdir -pv" \
-	yt="yt-dlp --add-metadata -i" \
 	yta="yt-dlp -x -f 'bv*[height<=144]+ba/b[height<=144] / wv*+ba/w'" \
 	ffmpeg="ffmpeg -hide_banner"
 
