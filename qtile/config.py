@@ -11,7 +11,9 @@ from libqtile.lazy import lazy
 from typing import List  # noqa: F401
 
 mod = "mod4"                                     # Sets mod key to SUPER/WINDOWS
-myTerm = "st"                             # My terminal of choice
+myTerm = "kitty"                             # My terminal of choice
+myBrowser = "firefox"
+myFile = "caja"
 
 keys = [
          ### The essentials
@@ -20,7 +22,7 @@ keys = [
              desc='Launches My Terminal'
              ),
          Key([mod, "shift"], "Return",
-             lazy.spawn("dmenu_run -p 'Run: '"),
+             lazy.spawn("rofi -show drun"),
              desc='Run Launcher'
              ),
          Key([mod], "Tab",
@@ -38,6 +40,10 @@ keys = [
          Key([mod, "shift"], "q",
              lazy.shutdown(),
              desc='Shutdown Qtile'
+             ),
+         Key([mod, "shift"], "e",
+             lazy.spawn("emacsclient -c -a emacs"),
+             desc='Doom Emacs'
              ),
 	### Volume control
           Key([mod], "equal",
@@ -128,12 +134,16 @@ keys = [
          # Applications launched using the key chord SUPER+p followed by 'key'
          KeyChord([mod], "p", [
              Key([], "t",
-                 lazy.spawn("thunar"),
-                 desc='Launch Xfce4 filemanager'
+                 lazy.spawn(myFile),
+                 desc='Launch default file manager'
+                 ),
+             Key([], "n",
+                 lazy.spawn(myTerm+" -e nnn"),
+                 desc='Launch terminal file manager'
                  ),
              Key([], "b",
-                 lazy.spawn("brave-beta --low-end-device-mode --low-res-tiling --process-per-site "),
-                 desc='Launch Brave browser'
+                 lazy.spawn(myBrowser),
+                 desc='Launch default browser'
                  ),
              Key([], "i",
                  lazy.spawn("dm-maim"),
@@ -148,7 +158,7 @@ keys = [
                  desc='A logout menu'
                  ),
              Key([], "h",
-                 lazy.spawn("st -e htop"),
+                 lazy.spawn(myTerm+" -e htop"),
                  desc='Lightweight task manager'
                  ),
              Key([], "s",
@@ -356,14 +366,14 @@ def init_widgets_list():
                        background = colors[4],
                        fontsize = 14
                        ),
-              widget.CheckUpdates(
-                       update_interval = 1800,
-                       distro = "Arch_checkupdates",
-                       display_format = "{updates} Updates",
-                       foreground = colors[2],
-                       mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo powerpill -Syu')},
-                       background = colors[4]
-                       ),
+             # widget.CheckUpdates(
+             #          update_interval = 1800,
+             #          distro = "Arch_checkupdates",
+             #          display_format = "{updates} Updates",
+             #          foreground = colors[2],
+             #          mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo powerpill -Syu')},
+             #          background = colors[4]
+             #          ),
               widget.TextBox(
                        text = '',
                        background = colors[4],
