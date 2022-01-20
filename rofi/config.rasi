@@ -1,0 +1,9 @@
+//@theme "/home/bruh/.config/rofi/themes/dt-center.rasi"
+//@theme "/home/bruh/.config/rofi/themes/dt-dmenu.rasi"
+//@theme "/home/bruh/.config/rofi/themes/dt-center.rasi"
+
+configuration {
+ modi: "drun,run";
+ font: "hack 10";
+ }
+@theme "/home/bruh/.config/rofi/themes/config2.rasi"
