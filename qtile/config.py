@@ -7,13 +7,13 @@ from libqtile import qtile
 from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
-from libqtile.lazy import lazy
+from libqtile.command import lazy
 from typing import List  # noqa: F401
 
-mod = "mod4"                                     # Sets mod key to SUPER/WINDOWS
+mod = "mod4"                                 # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"                             # My terminal of choice
-myBrowser = "firefox"
-myFile = "caja"
+myBrowser = "firefox"                        # Default browser
+myFile = "caja"                              # File manager
 
 keys = [
          ### The essentials
@@ -186,7 +186,8 @@ groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))        # Switch to another group
-    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name))) # Send current window to another group
+#    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name),
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name), lazy.group[name].toscreen())) # Send current window to another group
 
 layout_theme = {"border_width": 2,
                 "margin": 8,
@@ -346,48 +347,49 @@ def init_widgets_list():
               #        background = colors[5],
               #        fontsize = 11
               #        ),
-              widget.ThermalSensor(
-                        foreground = colors[2],
-                        background = colors[5],
-                        threshold = 90,
-                        padding = 5
-                        ),
-              widget.TextBox(
-                       text='',
-                       background = colors[5],
-                       foreground = colors[4],
-                       padding = 0,
-                       fontsize = 37
-                       ),
-              widget.TextBox(
-                       text = " ⟳",
-                       padding = 2,
-                       foreground = colors[2],
-                       background = colors[4],
-                       fontsize = 14
-                       ),
-             # widget.CheckUpdates(
-             #          update_interval = 1800,
-             #          distro = "Arch_checkupdates",
-             #          display_format = "{updates} Updates",
-             #          foreground = colors[2],
-             #          mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo powerpill -Syu')},
-             #          background = colors[4]
-             #          ),
-              widget.TextBox(
-                       text = '',
-                       background = colors[4],
-                       foreground = colors[5],
-                       padding = 0,
-                       fontsize = 37
-                       ),
-              widget.TextBox(
-                       text = " 🖬",
-                       foreground = colors[2],
-                       background = colors[5],
-                       padding = 0,
-                       fontsize = 14
-                       ),
+              #widget.ThermalSensor(
+              #          foreground = colors[2],
+              #          background = colors[5],
+              #          metric = True,
+              #          threshold = 90,
+              #          padding = 5
+              #          ),
+              #widget.TextBox(
+              #         text='',
+              #         background = colors[5],
+              #         foreground = colors[4],
+              #         padding = 0,
+              #         fontsize = 37
+              #         ),
+              # widget.TextBox(
+              #          text = " ⟳",
+              #          padding = 2,
+              #         foreground = colors[2],
+              #         background = colors[4],
+              #         fontsize = 14
+              #         ),
+              # widget.CheckUpdates(
+              #          update_interval = 1800,
+              #          distro = "Arch_checkupdates",
+              #          display_format = "{updates} Updates",
+              #          foreground = colors[2],
+              #          mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo powerpill -Syu')},
+              #          background = colors[4]
+              #          ),
+              #widget.TextBox(
+              #         text = '',
+              #         background = colors[4],
+              #         foreground = colors[5],
+              #         padding = 0,
+              #         fontsize = 37
+              #         ),
+              #widget.TextBox(
+              #         text = " 🖬",
+              #         foreground = colors[2],
+              #         background = colors[5],
+              #         padding = 0,
+              #         fontsize = 14
+              #         ),
               widget.Memory(
                        foreground = colors[2],
                        background = colors[5],
@@ -401,31 +403,31 @@ def init_widgets_list():
                        padding = 0,
                        fontsize = 37
                        ),
-              widget.TextBox(
-                       text = '',
-                       background = colors[4],
-                       foreground = colors[5],
-                       padding = 0,
-                       fontsize = 37
-                       ),
-              widget.TextBox(
-                      text = " Vol:",
-                       foreground = colors[2],
-                       background = colors[5],
-                       padding = 0
-                       ),
-              widget.Volume(
-                       foreground = colors[2],
-                       background = colors[5],
-                       padding = 5
-                       ),
-              widget.TextBox(
-                       text = '',
-                       background = colors[5],
-                       foreground = colors[4],
-                       padding = 0,
-                       fontsize = 37
-                       ),
+             # widget.TextBox(
+             #          text = '',
+             #          background = colors[4],
+             #          foreground = colors[5],
+             #          padding = 0,
+             #          fontsize = 37
+             #          ),
+             # widget.TextBox(
+             #         text = " Vol:",
+             #          foreground = colors[2],
+             #          background = colors[5],
+             #          padding = 0
+             #          ),
+             # widget.Volume(
+             #          foreground = colors[2],
+             #          background = colors[5],
+             #          padding = 5
+             #          ),
+             # widget.TextBox(
+             #          text = '',
+             #          background = colors[5],
+             #          foreground = colors[4],
+             #          padding = 0,
+             #          FONTSIZE = 37
+             #          ),
               widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
                        foreground = colors[0],
@@ -491,6 +493,11 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front())
 ]
 
+@hook.subscribe.startup
+def start_always():
+    # Set the cursor to something sane in X
+    subprocess.Popen(['xsetroot', '-cursor_name', 'left_ptr'])
+
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 main = None
@@ -498,15 +505,40 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 
+@hook.subscribe.client_new
+def set_floating(window):
+    if (window.window.get_wm_transient_for()
+            or window.window.get_wm_type() in floating_types):
+        window.floating = True
+
+floating_types = ["notification", "toolbar", "splash", "dialog"]
+
 floating_layout = layout.Floating(float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
-    # default_float_rules include: utility, notification, toolbar, splash, dialog,
-    # file_progress, confirm, download and error.
     *layout.Floating.default_float_rules,
-    Match(title='Confirmation'),      # tastyworks exit box
-])
+    Match(wm_class='confirmreset'),  # gitk
+    Match(wm_class='makebranch'),  # gitk
+    Match(wm_class='maketag'),  # gitk
+    Match(wm_class='ssh-askpass'),  # ssh-askpass
+    Match(title='branchdialog'),  # gitk
+    Match(title='pinentry'),  # GPG key password entry
+    Match(wm_class='confirm'),
+    Match(wm_class='dialog'),
+    Match(wm_class='download'),
+    Match(wm_class='error'),
+    Match(wm_class='file_progress'),
+    Match(wm_class='notification'),
+    Match(wm_class='splash'),
+    Match(wm_class='toolbar'),
+    Match(wm_class='Arandr'),
+    Match(wm_class='feh'),
+    Match(wm_class='Galculator'),
+    Match(wm_class='xfce4-terminal'),
+
+], fullscreen_border_width = 0, border_width = 0)
+
 auto_fullscreen = True
-focus_on_window_activation = "smart"
+focus_on_window_activation = "focus" # or smart
 
 @hook.subscribe.startup_once
 def start_once():
