@@ -229,7 +229,6 @@ layouts = [
          vspace = 3,
          panel_width = 200
          ),
-    layout.Floating(**layout_theme)
 ]
 
 colors = [["#282c34", "#282c34"], # panel background
