@@ -318,70 +318,42 @@ def init_widgets_list():
                        foreground = colors[0],
                        background = colors[0]
                        ),
-              widget.TextBox(
-                       text = '',
-                       background = colors[0],
-                       foreground = colors[4],
-                       padding = 0,
-                       fontsize = 37
-                       ),
-             widget.Net(
-                       interface = "wlan0",
-                       format = '{down} ↓↑ {up}',
+            #widget.Net(
+            #          interface = "enp5s0",
+            #          format = 'Net: {down} ↓↑ {up}',
+            #          foreground = colors[1],
+            #          background = colors[3],
+            #          padding = 5
+            #          ),
+             #widget.TextBox(
+             #        text = " 🌡 TEMP NOT SHOWN ",
+             #        padding = 2,
+             #        foreground = colors[2],
+             #        background = colors[5],
+             #        fontsize = 11
+             #        ),
+             widget.ThermalSensor(
                        foreground = colors[2],
-                       background = colors[4],
+                       background = colors[5],
+                       metric = True,
+                       threshold = 90,
                        padding = 5
                        ),
-              widget.TextBox(
-                       text = '',
+               widget.TextBox(
+                        text = " ⟳",
+                        padding = 2,
+                       foreground = colors[2],
                        background = colors[4],
-                       foreground = colors[5],
-                       padding = 0,
-                       fontsize = 37
+                       fontsize = 14
                        ),
-              #widget.TextBox(
-              #        text = " 🌡 TEMP NOT SHOWN ",
-              #        padding = 2,
-              #        foreground = colors[2],
-              #        background = colors[5],
-              #        fontsize = 11
-              #        ),
-              #widget.ThermalSensor(
-              #          foreground = colors[2],
-              #          background = colors[5],
-              #          metric = True,
-              #          threshold = 90,
-              #          padding = 5
-              #          ),
-              #widget.TextBox(
-              #         text='',
-              #         background = colors[5],
-              #         foreground = colors[4],
-              #         padding = 0,
-              #         fontsize = 37
-              #         ),
-              # widget.TextBox(
-              #          text = " ⟳",
-              #          padding = 2,
-              #         foreground = colors[2],
-              #         background = colors[4],
-              #         fontsize = 14
-              #         ),
-              # widget.CheckUpdates(
-              #          update_interval = 1800,
-              #          distro = "Arch_checkupdates",
-              #          display_format = "{updates} Updates",
-              #          foreground = colors[2],
-              #          mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo powerpill -Syu')},
-              #          background = colors[4]
-              #          ),
-              #widget.TextBox(
-              #         text = '',
-              #         background = colors[4],
-              #         foreground = colors[5],
-              #         padding = 0,
-              #         fontsize = 37
-              #         ),
+               widget.CheckUpdates(
+                        update_interval = 1800,
+                        distro = "Fedora_checkupdates",
+                        display_format = "{updates} Updates",
+                        foreground = colors[2],
+                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e sudo dnf upgrade')},
+                        background = colors[4]
+                        ),
               #widget.TextBox(
               #         text = " 🖬",
               #         foreground = colors[2],
@@ -395,38 +367,17 @@ def init_widgets_list():
                        mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(myTerm + ' -e htop')},
                        padding = 5
                        ),
-              widget.TextBox(
-                       text='',
-                       background = colors[5],
-                       foreground = colors[4],
-                       padding = 0,
-                       fontsize = 37
-                       ),
-             # widget.TextBox(
-             #          text = '',
-             #          background = colors[4],
-             #          foreground = colors[5],
-             #          padding = 0,
-             #          fontsize = 37
-             #          ),
-             # widget.TextBox(
-             #         text = " Vol:",
-             #          foreground = colors[2],
-             #          background = colors[5],
-             #          padding = 0
-             #          ),
-             # widget.Volume(
-             #          foreground = colors[2],
-             #          background = colors[5],
-             #          padding = 5
-             #          ),
-             # widget.TextBox(
-             #          text = '',
-             #          background = colors[5],
-             #          foreground = colors[4],
-             #          padding = 0,
-             #          FONTSIZE = 37
-             #          ),
+             #widget.TextBox(
+             #        text = " Vol:",
+             #         foreground = colors[2],
+             #         background = colors[5],
+             #         padding = 0
+             #         ),
+             #widget.Volume(
+             #         foreground = colors[2],
+             #         background = colors[5],
+             #         padding = 5
+             #         ),
               widget.CurrentLayoutIcon(
                        custom_icon_paths = [os.path.expanduser("~/.config/qtile/icons")],
                        foreground = colors[0],
@@ -439,13 +390,6 @@ def init_widgets_list():
                        background = colors[4],
                        padding = 5
                        ),
-              widget.TextBox(
-                       text = '',
-                       background = colors[4],
-                       foreground = colors[5],
-                       padding = 0,
-                       fontsize = 37
-                       ),
               widget.Clock(
                        foreground = colors[2],
                        background = colors[5],
@@ -456,23 +400,17 @@ def init_widgets_list():
 
 def init_widgets_screen1():
     widgets_screen1 = init_widgets_list()
-    del widgets_screen1[7:8]               # Slicing removes unwanted widgets (systray) on Monitors 1,3
     return widgets_screen1
 
-def init_widgets_screen2():
-    widgets_screen2 = init_widgets_list()
-    return widgets_screen2                 # Monitor 2 will display all widgets in widgets_list
 
 def init_screens():
     return [Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=20)),
-            Screen(top=bar.Bar(widgets=init_widgets_screen2(), opacity=1.0, size=20)),
             Screen(top=bar.Bar(widgets=init_widgets_screen1(), opacity=1.0, size=20))]
 
 if __name__ in ["config", "__main__"]:
     screens = init_screens()
     widgets_list = init_widgets_list()
     widgets_screen1 = init_widgets_screen1()
-    widgets_screen2 = init_widgets_screen2()
 
 def window_to_prev_group(qtile):
     if qtile.currentWindow is not None:
