@@ -73,6 +73,14 @@ keys = [
              desc='Move down a section in treetab'
              ),
          ### Window controls
+         Key([mod], "Page_Up",
+             lazy.screen.next_group(skip_empty=False),
+             desc='Move to next workspace'
+             ),
+         Key([mod], "Page_Down",
+             lazy.screen.prev_group(skip_empty=False),
+             desc='Move to previous workspace'
+             ),
          Key([mod], "j",
              lazy.layout.down(),
              desc='Move focus down in current stack pane'
@@ -180,7 +188,7 @@ group_names = [("WWW", {'layout': 'max'}),
                ("CHAT", {'layout': 'monadtall'}),
                ("MUS", {'layout': 'monadtall'}),
                ("VID", {'layout': 'monadtall'}),
-               ("GFX", {'layout': 'floating'})]
+               ("GFX", {'layout': 'monadtall'})]
 
 groups = [Group(name, **kwargs) for name, kwargs in group_names]
 
