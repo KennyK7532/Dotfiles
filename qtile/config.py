@@ -13,7 +13,7 @@ from typing import List  # noqa: F401
 mod = "mod4"                                 # Sets mod key to SUPER/WINDOWS
 myTerm = "kitty"                             # My terminal of choice
 myBrowser = "firefox"                        # Default browser
-myFile = "caja"                              # File manager
+myFile = "pcmanfm"                              # File manager
 
 keys = [
          ### The essentials
@@ -73,11 +73,11 @@ keys = [
              desc='Move down a section in treetab'
              ),
          ### Window controls
-         Key([mod], "Page_Up",
+         Key([mod], "Page_Down",
              lazy.screen.next_group(skip_empty=False),
              desc='Move to next workspace'
              ),
-         Key([mod], "Page_Down",
+         Key([mod], "Page_Up",
              lazy.screen.prev_group(skip_empty=False),
              desc='Move to previous workspace'
              ),
@@ -166,8 +166,8 @@ keys = [
                  desc='A logout menu'
                  ),
              Key([], "h",
-                 lazy.spawn(myTerm+" -e htop"),
-                 desc='Lightweight task manager'
+                 lazy.spawn("dm-hub"),
+                 desc='Selection of dmscripts'
                  ),
              Key([], "s",
                  lazy.spawn("slock"),
@@ -237,6 +237,7 @@ layouts = [
          vspace = 3,
          panel_width = 200
          ),
+    layout.Floating(**layout_theme)
 ]
 
 colors = [["#282c34", "#282c34"], # panel background
@@ -483,7 +484,8 @@ floating_layout = layout.Floating(float_rules=[
 ], fullscreen_border_width = 0, border_width = 0)
 
 auto_fullscreen = True
-focus_on_window_activation = "focus" # or smart
+focus_on_window_activation = "smart" # focus or smart
+reconfigure_screens = True
 
 @hook.subscribe.startup_once
 def start_once():
